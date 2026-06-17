@@ -1,0 +1,2591 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  body,
+  div {
+    font-family: 'Inter', system-ui, sans-serif
+  }
+
+  /* Custom scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.35);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.55);
+  }
+
+  /* ── LOGIN SCREEN ── */
+  .LOGIN {
+    min-height: 680px;
+    background: #f0f9ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px
+  }
+
+  .LOGIN-CARD {
+    background: #fff;
+    border-radius: 18px;
+    border: 1.5px solid #bae6fd;
+    width: 100%;
+    max-width: 420px;
+    overflow: hidden
+  }
+
+  .LC-HEAD {
+    background: #0c1a2e;
+    padding: 28px 28px 22px;
+    text-align: center
+  }
+
+  .LC-BRAND {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    color: #38bdf8;
+    font-weight: 500;
+    margin-bottom: 6px
+  }
+
+  .LC-NAME {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -.5px;
+    line-height: 1.1
+  }
+
+  .LC-NAME span {
+    color: #38bdf8
+  }
+
+  .LC-SUB {
+    font-size: 11px;
+    color: rgba(255, 255, 255, .35);
+    margin-top: 4px;
+    letter-spacing: .3px
+  }
+
+  .LC-BADGE {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(56, 189, 248, .15);
+    border: 1px solid rgba(56, 189, 248, .3);
+    border-radius: 20px;
+    padding: 4px 12px;
+    margin-top: 12px;
+    font-size: 11px;
+    color: #38bdf8;
+    font-weight: 500
+  }
+
+  .LC-BODY {
+    padding: 28px
+  }
+
+  .LF-G {
+    margin-bottom: 16px
+  }
+
+  .LF-L {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 6px
+  }
+
+  .LF-W {
+    position: relative
+  }
+
+  .LF-I {
+    width: 100%;
+    padding: 10px 12px 10px 38px;
+    border: 1.5px solid #e0f2fe;
+    border-radius: 9px;
+    font-size: 13px;
+    color: #0c1a2e;
+    background: #f8fafc;
+    outline: none;
+    font-family: inherit
+  }
+
+  .LF-I:focus {
+    border-color: #0ea5e9;
+    background: #fff
+  }
+
+  .LF-IC {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #94a3b8
+  }
+
+  .LF-ERR {
+    font-size: 11px;
+    color: #dc2626;
+    margin-top: 4px;
+    display: none
+  }
+
+  .LF-ERR.show {
+    display: block
+  }
+
+  .BTN-LOGIN {
+    width: 100%;
+    background: #0ea5e9;
+    color: #fff;
+    border: none;
+    padding: 11px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: .2px;
+    margin-top: 4px
+  }
+
+  .BTN-LOGIN:hover {
+    background: #0284c7
+  }
+
+  .LC-FOOT {
+    text-align: center;
+    padding: 0 28px 24px;
+    font-size: 11px;
+    color: #94a3b8
+  }
+
+  .hint-pill {
+    background: #f0f9ff;
+    border: 1px solid #e0f2fe;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-top: 12px;
+    font-size: 11px;
+    color: #475569;
+    text-align: left
+  }
+
+  .hint-pill strong {
+    color: #0c1a2e
+  }
+
+  /* ── DASHBOARD ── */
+  .DASH {
+    display: none;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+    background: #f0f9ff;
+    box-sizing: border-box;
+  }
+
+  .DASH.show {
+    display: flex
+  }
+
+  .DB-WRAP {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    border: none
+  }
+
+  /* Sidebar */
+  .SB {
+    width: 212px;
+    min-width: 212px;
+    background: #0c1a2e;
+    display: flex;
+    flex-direction: column
+  }
+
+  .SB-HEAD {
+    padding: 16px 15px 12px;
+    border-bottom: 1px solid rgba(56, 189, 248, .18)
+  }
+
+  .SB-BRAND {
+    font-size: 9px;
+    letter-spacing: 2.2px;
+    color: #38bdf8;
+    font-weight: 600;
+    margin-bottom: 4px
+  }
+
+  .SB-NAME {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -.2px;
+    line-height: 1.2
+  }
+
+  .SB-NAME span {
+    color: #38bdf8
+  }
+
+  .SB-TYPE {
+    font-size: 9px;
+    color: rgba(255, 255, 255, .28);
+    letter-spacing: 1.2px;
+    margin-top: 2px
+  }
+
+  .SB-TK {
+    padding: 7px 0 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+    overflow: hidden
+  }
+
+  .TK-L {
+    font-size: 9px;
+    color: rgba(56, 189, 248, .5);
+    letter-spacing: 1.2px;
+    padding: 0 14px 3px
+  }
+
+  .TK-S {
+    white-space: nowrap;
+    font-size: 10px;
+    color: rgba(255, 255, 255, .4);
+    padding: 0 14px;
+    animation: tk 22s linear infinite
+  }
+
+  .TK-P {
+    display: inline-block;
+    margin-right: 16px
+  }
+
+  .TK-V {
+    color: #38bdf8;
+    font-weight: 500
+  }
+
+  @keyframes tk {
+    0% {
+      transform: translateX(0)
+    }
+
+    100% {
+      transform: translateX(-50%)
+    }
+  }
+
+  .SB-NAV {
+    flex: 1;
+    padding: 8px 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56, 189, 248, 0.18) transparent;
+  }
+
+  .NL {
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    color: rgba(255, 255, 255, .2);
+    padding: 9px 14px 3px
+  }
+
+  .NI {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 14px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, .42);
+    border-left: 2.5px solid transparent;
+    font-size: 12px;
+    transition: all .12s
+  }
+
+  .NI:hover {
+    color: rgba(255, 255, 255, .82);
+    background: rgba(255, 255, 255, .05)
+  }
+
+  .NI.ac {
+    color: #38bdf8;
+    background: rgba(56, 189, 248, .1);
+    border-left-color: #38bdf8;
+    font-weight: 500
+  }
+
+  .NI i {
+    font-size: 15px
+  }
+
+  .SB-FOOT {
+    padding: 11px 14px;
+    border-top: 1px solid rgba(255, 255, 255, .07)
+  }
+
+  .UA-ROW {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px
+  }
+
+  .UA {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(56, 189, 248, .18);
+    border: 1.5px solid rgba(56, 189, 248, .4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: #38bdf8;
+    font-weight: 700;
+    flex-shrink: 0
+  }
+
+  .UN {
+    font-size: 12px;
+    color: rgba(255, 255, 255, .82);
+    font-weight: 600
+  }
+
+  .UR {
+    font-size: 10px;
+    color: #38bdf8;
+    font-weight: 500
+  }
+
+  .ROLE-BADGE {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(56, 189, 248, .12);
+    border: 1px solid rgba(56, 189, 248, .25);
+    border-radius: 20px;
+    padding: 3px 9px;
+    font-size: 10px;
+    color: #38bdf8;
+    font-weight: 500;
+    width: 100%
+  }
+
+  .BTN-LOGOUT {
+    width: 100%;
+    margin-top: 8px;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .12);
+    color: rgba(255, 255, 255, .5);
+    padding: 6px;
+    border-radius: 7px;
+    font-size: 11px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px
+  }
+
+  .BTN-LOGOUT:hover {
+    background: rgba(220, 38, 38, .15);
+    border-color: rgba(220, 38, 38, .3);
+    color: #fca5a5
+  }
+
+  /* Main area */
+  .MA {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #f0f9ff
+  }
+
+  .TB {
+    background: #fff;
+    border-bottom: 1.5px solid #e0f2fe;
+    padding: 0 18px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0
+  }
+
+  .TB-T {
+    font-size: 14px;
+    font-weight: 600;
+    color: #0c1a2e
+  }
+
+  .TB-R {
+    display: flex;
+    align-items: center;
+    gap: 7px
+  }
+
+  .TB-CHIP {
+    background: #e0f2fe;
+    color: #0369a1;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid #bae6fd;
+    font-weight: 500
+  }
+
+  .TB-IB {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #64748b;
+    border: 1px solid #e2e8f0;
+    background: #fff
+  }
+
+  .CA {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 18px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(14, 165, 233, 0.25) transparent;
+  }
+
+  .SP {
+    display: none
+  }
+
+  .SP.ac {
+    display: block
+  }
+
+  /* KPI row */
+  .KROW {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 9px;
+    margin-bottom: 14px
+  }
+
+  .KC {
+    background: #fff;
+    border: 1.5px solid #e0f2fe;
+    border-radius: 11px;
+    padding: 13px;
+    border-top: 3px solid #0ea5e9
+  }
+
+  .KC-L {
+    font-size: 10px;
+    color: #64748b;
+    letter-spacing: .6px;
+    margin-bottom: 4px
+  }
+
+  .KC-V {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0c1a2e;
+    line-height: 1
+  }
+
+  .KC-D {
+    font-size: 11px;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 3px
+  }
+
+  .up {
+    color: #059669
+  }
+
+  .dn {
+    color: #dc2626
+  }
+
+  /* Cards */
+  .CC {
+    background: #fff;
+    border: 1.5px solid #e0f2fe;
+    border-radius: 11px;
+    padding: 13px;
+    margin-bottom: 12px
+  }
+
+  .CC-H {
+    font-size: 12px;
+    font-weight: 600;
+    color: #0c1a2e;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .CC-H span {
+    font-size: 10px;
+    color: #94a3b8;
+    font-weight: 400
+  }
+
+  .CROW {
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    gap: 11px;
+    margin-bottom: 12px
+  }
+
+  .TB-ROW {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 6px
+  }
+
+  .TB-LBL {
+    font-size: 11px;
+    color: #64748b;
+    width: 85px;
+    flex-shrink: 0
+  }
+
+  .TB-BW {
+    flex: 1;
+    background: #e0f2fe;
+    border-radius: 4px;
+    height: 7px
+  }
+
+  .TB-B {
+    height: 7px;
+    border-radius: 4px
+  }
+
+  .TB-VAL {
+    font-size: 11px;
+    color: #0c1a2e;
+    font-weight: 500;
+    width: 38px;
+    text-align: right
+  }
+
+  /* Leads */
+  .LR {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f9ff
+  }
+
+  .LR:last-child {
+    border-bottom: none
+  }
+
+  .LAV {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    flex-shrink: 0
+  }
+
+  .LI {
+    flex: 1
+  }
+
+  .LN {
+    font-size: 12px;
+    color: #0c1a2e;
+    font-weight: 500
+  }
+
+  .LM {
+    font-size: 10px;
+    color: #64748b
+  }
+
+  .LS {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500
+  }
+
+  .s-hot {
+    background: #fee2e2;
+    color: #991b1b
+  }
+
+  .s-warm {
+    background: #fef3c7;
+    color: #92400e
+  }
+
+  .s-new {
+    background: #e0f2fe;
+    color: #075985
+  }
+
+  .s-done {
+    background: #dcfce7;
+    color: #166534
+  }
+
+  /* Funnel */
+  .FS {
+    margin-bottom: 7px
+  }
+
+  .FR {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3px
+  }
+
+  .FL {
+    font-size: 11px;
+    color: #64748b
+  }
+
+  .FC {
+    font-size: 11px;
+    color: #0c1a2e;
+    font-weight: 500
+  }
+
+  .FBW {
+    background: #e0f2fe;
+    border-radius: 4px;
+    height: 8px
+  }
+
+  .FB {
+    height: 8px;
+    border-radius: 4px;
+    background: #0ea5e9
+  }
+
+  /* Table */
+  .TBL {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed
+  }
+
+  .TBL th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 500;
+    color: #64748b;
+    padding: 8px 10px;
+    border-bottom: 1.5px solid #e0f2fe;
+    background: #f8fafc
+  }
+
+  .TBL td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f0f9ff;
+    font-size: 12px;
+    color: #0c1a2e;
+    vertical-align: middle
+  }
+
+  .TBL tr:hover td {
+    background: #f0f9ff
+  }
+
+  .TACT {
+    display: flex;
+    gap: 4px
+  }
+
+  .TEB {
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    cursor: pointer;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    gap: 3px
+  }
+
+  .t-edit {
+    background: #e0f2fe;
+    color: #075985;
+    border-color: #bae6fd
+  }
+
+  .t-del {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #fecaca
+  }
+
+  .t-view {
+    background: #f0fdf4;
+    color: #166534;
+    border-color: #bbf7d0
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 500
+  }
+
+  .b-sale {
+    background: #e0f2fe;
+    color: #075985
+  }
+
+  .b-rent {
+    background: #f0fdf4;
+    color: #166534
+  }
+
+  .b-off {
+    background: #fef3c7;
+    color: #92400e
+  }
+
+  .b-hot {
+    background: #fee2e2;
+    color: #991b1b
+  }
+
+  .b-done {
+    background: #dcfce7;
+    color: #166634
+  }
+
+  .PT {
+    color: #0ea5e9;
+    font-weight: 600
+  }
+
+  /* Top toolbar */
+  .ROW-TOP {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px
+  }
+
+  .RT-L {
+    font-size: 13px;
+    font-weight: 600;
+    color: #0c1a2e
+  }
+
+  .RT-S {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 1px
+  }
+
+  .RT-R {
+    display: flex;
+    align-items: center;
+    gap: 7px
+  }
+
+  .SRCH {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #fff;
+    border: 1.5px solid #e0f2fe;
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 180px
+  }
+
+  .SRCH input {
+    border: none;
+    outline: none;
+    font-size: 12px;
+    color: #0c1a2e;
+    background: transparent;
+    width: 100%
+  }
+
+  .ADD-BTN {
+    background: #0ea5e9;
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px
+  }
+
+  .ADD-BTN:hover {
+    background: #0284c7
+  }
+
+  .SEG {
+    display: flex;
+    gap: 2px;
+    background: #e0f2fe;
+    padding: 3px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    width: fit-content
+  }
+
+  .ST {
+    padding: 4px 12px;
+    font-size: 11px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #64748b
+  }
+
+  .ST.ac {
+    background: #fff;
+    color: #0369a1;
+    font-weight: 500;
+    border: 1px solid #bae6fd
+  }
+
+  /* Modal */
+  .MOD-BG {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(12, 26, 46, .55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 9999;
+  }
+
+  .MOD {
+    background: #fff;
+    border-radius: 14px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: hidden;
+    border: 1.5px solid #bae6fd;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .MH {
+    background: #0c1a2e;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+  }
+
+  .MH-T {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff
+  }
+
+  .MH-S {
+    font-size: 10px;
+    color: #38bdf8;
+    margin-top: 1px
+  }
+
+  .MX {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, .1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #94a3b8;
+    border: 1px solid rgba(255, 255, 255, .12)
+  }
+
+  .MB {
+    padding: 16px 18px;
+    overflow-y: auto;
+  }
+
+  .FG {
+    margin-bottom: 12px
+  }
+
+  .FL2 {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: #334155;
+    margin-bottom: 4px
+  }
+
+  .FI {
+    width: 100%;
+    padding: 8px 11px;
+    border: 1.5px solid #e0f2fe;
+    border-radius: 8px;
+    font-size: 12px;
+    color: #0c1a2e;
+    background: #f8fafc;
+    outline: none;
+    font-family: inherit
+  }
+
+  .FI:focus {
+    border-color: #0ea5e9;
+    background: #fff
+  }
+
+  .FG2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px
+  }
+
+  .FG3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px
+  }
+
+  .RT-CHIP {
+    padding: 6px 8px;
+    border: 1.5px solid #e0f2fe;
+    border-radius: 7px;
+    font-size: 11px;
+    color: #64748b;
+    cursor: pointer;
+    text-align: center;
+    background: #f8fafc
+  }
+
+  .RT-CHIP.sel {
+    border-color: #0ea5e9;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 500
+  }
+
+  .MF {
+    padding: 12px 18px 16px;
+    border-top: 1px solid #f0f9ff;
+    display: flex;
+    gap: 7px;
+    justify-content: flex-end
+  }
+
+  .BTN-SKY {
+    background: #0ea5e9;
+    color: #fff;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px
+  }
+
+  .BTN-SKY:hover {
+    background: #0284c7
+  }
+
+  .BTN-OUT {
+    background: #fff;
+    color: #334155;
+    border: 1.5px solid #e0f2fe;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer
+  }
+
+  .BTN-DEL {
+    background: #fff;
+    color: #dc2626;
+    border: 1.5px solid #fecaca;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px
+  }
+
+  /* Toast */
+  .TOAST {
+    position: relative;
+    background: #0ea5e9;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 10px;
+    display: none
+  }
+
+  .TOAST.show {
+    display: block
+  }
+
+  .TOAST.err {
+    background: #dc2626
+  }
+
+  /* Project Detail Page Styles */
+  .pd-list-item {
+    background: #f8fafc;
+    border: 1.5px solid #e0f2fe;
+    border-radius: 9px;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+  }
+
+  .pd-list-item:hover {
+    border-color: #0ea5e9;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.05);
+  }
+</style>
+
+<!-- ═══════════════ LOGIN ═══════════════ -->
+<div class="LOGIN" id="login-screen">
+  <div class="LOGIN-CARD">
+    <div class="LC-HEAD">
+      <div class="LC-BRAND"><i class="ti ti-diamond" style="font-size:11px;vertical-align:-1px" aria-hidden="true"></i>
+        &nbsp;UAE LUXURY REAL ESTATE</div>
+      <div class="LC-NAME">Top<span>Luxury</span>Property</div>
+      <div class="LC-SUB">Broker & Admin Management Portal</div>
+      <div class="LC-BADGE"><i class="ti ti-shield-check" style="font-size:12px" aria-hidden="true"></i> Secure Admin
+        Access</div>
+    </div>
+    <div class="LC-BODY">
+      <div class="FG">
+        <label class="FL2">Username</label>
+        <div class="LF-W">
+          <i class="ti ti-user LF-IC" aria-hidden="true"></i>
+          <input class="LF-I" id="inp-user" placeholder="Enter your username" value="manujgarg">
+        </div>
+      </div>
+      <div class="FG">
+        <label class="FL2">Password</label>
+        <div class="LF-W">
+          <i class="ti ti-lock LF-IC" aria-hidden="true"></i>
+          <input class="LF-I" id="inp-pass" type="password" placeholder="Enter your password" value="admin123">
+        </div>
+        <div class="LF-ERR" id="login-err"><i class="ti ti-alert-circle" style="font-size:12px;vertical-align:-1px"
+            aria-hidden="true"></i> Invalid credentials. Try username: manujgarg / password: admin123</div>
+      </div>
+      <button class="BTN-LOGIN" onclick="doLogin()"><i class="ti ti-login" style="font-size:15px;vertical-align:-2px"
+          aria-hidden="true"></i> &nbsp;Sign in to dashboard</button>
+      <div class="hint-pill" style="margin-top:14px">
+        <strong>Demo credentials:</strong><br>
+        Username: <strong>manujgarg</strong> &nbsp;·&nbsp; Password: <strong>admin123</strong>
+      </div>
+    </div>
+    <div class="LC-FOOT">TopLuxuryProperty © 2025 &nbsp;·&nbsp; All rights reserved</div>
+  </div>
+</div>
+
+<!-- ═══════════════ DASHBOARD ═══════════════ -->
+<div class="DASH" id="dashboard">
+  <div class="DB-WRAP">
+
+    <!-- Sidebar -->
+    <div class="SB">
+      <div class="SB-HEAD">
+        <div class="SB-BRAND"><i class="ti ti-diamond" style="font-size:10px;vertical-align:-1px"
+            aria-hidden="true"></i> &nbsp;UAE Luxury Real Estate</div>
+        <div class="SB-NAME">Top<span>Luxury</span><br>Property</div>
+        <div class="SB-TYPE">Broker CMS Portal</div>
+      </div>
+
+      <div class="SB-NAV">
+        <div class="NL">Dashboard</div>
+        <div class="NI ac" onclick="sw('analytics',this)"><i class="ti ti-chart-bar" aria-hidden="true"></i> Analytics
+        </div>
+        <div class="NI" onclick="sw('leads',this)"><i class="ti ti-users" aria-hidden="true"></i> Leads</div>
+        <div class="NI" onclick="sw('listings',this)"><i class="ti ti-building-estate" aria-hidden="true"></i> Listings
+        </div>
+        <div class="NL">Management</div>
+        <div class="NI" onclick="sw('projects',this)"><i class="ti ti-layout-grid" aria-hidden="true"></i> Projects
+        </div>
+        <div class="NI" onclick="sw('viewings',this)"><i class="ti ti-calendar" aria-hidden="true"></i> Viewings</div>
+        <div class="NI" onclick="sw('contracts',this)"><i class="ti ti-file-text" aria-hidden="true"></i> Contracts
+        </div>
+        <div class="NI" onclick="sw('campaigns',this)"><i class="ti ti-mail" aria-hidden="true"></i> Campaigns</div>
+        <div class="NL">Super Admin</div>
+        <div class="NI" onclick="sw('users',this)"><i class="ti ti-shield-check" aria-hidden="true"></i> Users & roles
+        </div>
+        <div class="NI" onclick="sw('settings',this)"><i class="ti ti-settings" aria-hidden="true"></i> Settings</div>
+      </div>
+      <div class="SB-FOOT">
+        <div class="UA-ROW">
+          <div class="UA">MG</div>
+          <div>
+            <div class="UN">Manuj Gard</div>
+            <div class="UR"><i class="ti ti-shield-check" style="font-size:10px;vertical-align:-1px"
+                aria-hidden="true"></i> Super Admin</div>
+          </div>
+        </div>
+        <div class="ROLE-BADGE"><i class="ti ti-crown" style="font-size:11px" aria-hidden="true"></i> Full system access
+        </div>
+        <button class="BTN-LOGOUT" onclick="doLogout()"><i class="ti ti-logout" style="font-size:13px"
+            aria-hidden="true"></i> Sign out</button>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="MA">
+      <div class="TB">
+        <div class="TB-T" id="tb-title">Analytics Dashboard</div>
+        <div class="TB-R">
+          <div class="TB-CHIP"><i class="ti ti-map-pin" style="font-size:11px" aria-hidden="true"></i> Dubai, UAE</div>
+          <div class="TB-CHIP">Jun 2025</div>
+          <div class="TB-IB"><i class="ti ti-bell" aria-hidden="true"></i></div>
+          <div class="TB-IB"><i class="ti ti-refresh" aria-hidden="true"></i></div>
+        </div>
+      </div>
+      <div class="CA">
+
+        <!-- ANALYTICS -->
+        <div class="SP ac" id="p-analytics">
+          <div class="SEG">
+            <div class="ST ac">All channels</div>
+            <div class="ST">Organic</div>
+            <div class="ST">Paid</div>
+          </div>
+          <div class="KROW">
+            <div class="KC">
+              <div class="KC-L">Website users</div>
+              <div class="KC-V">24,381</div>
+              <div class="KC-D up"><i class="ti ti-trending-up" aria-hidden="true"></i> +18.4% vs last month</div>
+            </div>
+            <div class="KC">
+              <div class="KC-L">Property views</div>
+              <div class="KC-V">91,205</div>
+              <div class="KC-D up"><i class="ti ti-trending-up" aria-hidden="true"></i> +12.1%</div>
+            </div>
+            <div class="KC">
+              <div class="KC-L">Enquiries</div>
+              <div class="KC-V">1,842</div>
+              <div class="KC-D dn"><i class="ti ti-trending-down" aria-hidden="true"></i> −3.2%</div>
+            </div>
+            <div class="KC">
+              <div class="KC-L">Conversion rate</div>
+              <div class="KC-V">7.6%</div>
+              <div class="KC-D up"><i class="ti ti-trending-up" aria-hidden="true"></i> +0.9pp</div>
+            </div>
+          </div>
+          <div class="CROW">
+            <div class="CC" style="margin-bottom:0">
+              <div class="CC-H">Monthly sessions <span>Jan–Jun 2025</span></div>
+              <div style="display:flex;gap:10px;margin-bottom:8px">
+                <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b"><span
+                    style="width:9px;height:9px;border-radius:2px;background:#0ea5e9;display:inline-block"></span>Sessions</span>
+                <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b"><span
+                    style="width:9px;height:9px;border-radius:2px;background:#0c1a2e;display:inline-block"></span>Users</span>
+              </div>
+              <div style="position:relative;width:100%;height:148px"><canvas id="cSess" role="img"
+                  aria-label="Monthly sessions bar chart Jan to Jun 2025">Jan 14k, Feb 17k, Mar 19k, Apr 22k, May 21k,
+                  Jun 24k.</canvas></div>
+            </div>
+            <div class="CC" style="margin-bottom:0">
+              <div class="CC-H">Traffic sources</div>
+              <div style="position:relative;width:100%;height:105px;margin-bottom:10px"><canvas id="cSrc" role="img"
+                  aria-label="Donut: Organic 42, Direct 28, Paid 18, Social 12">Organic 42%, Direct 28%, Paid 18%,
+                  Social 12%.</canvas></div>
+              <div style="display:flex;flex-wrap:wrap;gap:5px 10px">
+                <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b"><span
+                    style="width:8px;height:8px;border-radius:50%;background:#0ea5e9;display:inline-block"></span>Organic
+                  42%</span>
+                <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b"><span
+                    style="width:8px;height:8px;border-radius:50%;background:#0c1a2e;display:inline-block"></span>Direct
+                  28%</span>
+                <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b"><span
+                    style="width:8px;height:8px;border-radius:50%;background:#38bdf8;display:inline-block"></span>Paid
+                  18%</span>
+                <span style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b"><span
+                    style="width:8px;height:8px;border-radius:50%;background:#7dd3fc;display:inline-block"></span>Social
+                  12%</span>
+              </div>
+            </div>
+          </div>
+          <div class="CC" style="margin-top:11px">
+            <div class="CC-H">Top areas by listing views <span>This month</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 20px">
+              <div>
+                <div class="TB-ROW">
+                  <div class="TB-LBL">Dubai Marina</div>
+                  <div class="TB-BW">
+                    <div class="TB-B" style="width:88%;background:#0ea5e9"></div>
+                  </div>
+                  <div class="TB-VAL">8,821</div>
+                </div>
+                <div class="TB-ROW">
+                  <div class="TB-LBL">Downtown</div>
+                  <div class="TB-BW">
+                    <div class="TB-B" style="width:73%;background:#0c1a2e"></div>
+                  </div>
+                  <div class="TB-VAL">7,305</div>
+                </div>
+                <div class="TB-ROW">
+                  <div class="TB-LBL">Palm Jumeirah</div>
+                  <div class="TB-BW">
+                    <div class="TB-B" style="width:60%;background:#38bdf8"></div>
+                  </div>
+                  <div class="TB-VAL">5,990</div>
+                </div>
+              </div>
+              <div>
+                <div class="TB-ROW">
+                  <div class="TB-LBL">JBR</div>
+                  <div class="TB-BW">
+                    <div class="TB-B" style="width:48%;background:#7dd3fc"></div>
+                  </div>
+                  <div class="TB-VAL">4,812</div>
+                </div>
+                <div class="TB-ROW">
+                  <div class="TB-LBL">DIFC</div>
+                  <div class="TB-BW">
+                    <div class="TB-B" style="width:35%;background:#0ea5e9"></div>
+                  </div>
+                  <div class="TB-VAL">3,490</div>
+                </div>
+                <div class="TB-ROW">
+                  <div class="TB-LBL">Business Bay</div>
+                  <div class="TB-BW">
+                    <div class="TB-B" style="width:28%;background:#0c1a2e"></div>
+                  </div>
+                  <div class="TB-VAL">2,801</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LEADS -->
+        <div class="SP" id="p-leads">
+          <div class="KROW">
+            <div class="KC">
+              <div class="KC-L">Total leads</div>
+              <div class="KC-V">347</div>
+              <div class="KC-D up"><i class="ti ti-trending-up" aria-hidden="true"></i> +22 this week</div>
+            </div>
+            <div class="KC">
+              <div class="KC-L">Hot prospects</div>
+              <div class="KC-V">38</div>
+              <div class="KC-D up"><i class="ti ti-trending-up" aria-hidden="true"></i> +5 today</div>
+            </div>
+            <div class="KC">
+              <div class="KC-L">Avg. response</div>
+              <div class="KC-V">14m</div>
+              <div class="KC-D up"><i class="ti ti-trending-up" aria-hidden="true"></i> −6m improved</div>
+            </div>
+            <div class="KC">
+              <div class="KC-L">Deals closed</div>
+              <div class="KC-V">12</div>
+              <div class="KC-D" style="color:#64748b">AED 48.2M value</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:11px;margin-bottom:12px">
+            <div class="CC" style="margin-bottom:0">
+              <div class="CC-H">Sales funnel</div>
+              <div class="FS">
+                <div class="FR"><span class="FL">Inquired</span><span class="FC">347</span></div>
+                <div class="FBW">
+                  <div class="FB" style="width:100%"></div>
+                </div>
+              </div>
+              <div class="FS">
+                <div class="FR"><span class="FL">Qualified</span><span class="FC">198</span></div>
+                <div class="FBW">
+                  <div class="FB" style="width:57%"></div>
+                </div>
+              </div>
+              <div class="FS">
+                <div class="FR"><span class="FL">Viewing booked</span><span class="FC">104</span></div>
+                <div class="FBW">
+                  <div class="FB" style="width:30%"></div>
+                </div>
+              </div>
+              <div class="FS">
+                <div class="FR"><span class="FL">Offer made</span><span class="FC">29</span></div>
+                <div class="FBW">
+                  <div class="FB" style="width:8%"></div>
+                </div>
+              </div>
+              <div class="FS">
+                <div class="FR"><span class="FL">Closed</span><span class="FC">12</span></div>
+                <div class="FBW">
+                  <div class="FB" style="width:3.5%;background:#059669"></div>
+                </div>
+              </div>
+            </div>
+            <div class="CC" style="margin-bottom:0">
+              <div class="CC-H">Recent leads</div>
+              <div class="LR">
+                <div class="LAV" style="background:#fee2e2;color:#991b1b">SA</div>
+                <div class="LI">
+                  <div class="LN">Sultan Al-Mansoori</div>
+                  <div class="LM">Palm Villa 5BR · AED 18–22M</div>
+                </div>
+                <div class="LS s-hot">Hot</div>
+              </div>
+              <div class="LR">
+                <div class="LAV" style="background:#e0f2fe;color:#075985">PK</div>
+                <div class="LI">
+                  <div class="LN">Priya Krishnamurthy</div>
+                  <div class="LM">Marina 2BR · AED 2.4M</div>
+                </div>
+                <div class="LS s-new">New</div>
+              </div>
+              <div class="LR">
+                <div class="LAV" style="background:#fef3c7;color:#92400e">MR</div>
+                <div class="LI">
+                  <div class="LN">Marcus Reynolds</div>
+                  <div class="LM">Downtown 3BR · AED 5.1M</div>
+                </div>
+                <div class="LS s-warm">Warm</div>
+              </div>
+              <div class="LR">
+                <div class="LAV" style="background:#dcfce7;color:#166534">RA</div>
+                <div class="LI">
+                  <div class="LN">Rania Al-Zaabi</div>
+                  <div class="LM">JBR Studio · AED 1.2M</div>
+                </div>
+                <div class="LS s-done">Closed</div>
+              </div>
+              <div class="LR">
+                <div class="LAV" style="background:#fee2e2;color:#991b1b">JL</div>
+                <div class="LI">
+                  <div class="LN">James Loughran</div>
+                  <div class="LM">DIFC Penthouse · AED 9.7M</div>
+                </div>
+                <div class="LS s-hot">Hot</div>
+              </div>
+            </div>
+          </div>
+          <div class="CC" style="margin-bottom:0">
+            <div class="CC-H">Lead sources <span>This month</span></div>
+            <div style="position:relative;width:100%;height:115px"><canvas id="cLeads" role="img"
+                aria-label="Lead sources: Website 142, Referral 88, Portals 67, Social 31, Events 19">Website 142,
+                Referral 88, Portals 67, Social 31, Events 19.</canvas></div>
+          </div>
+        </div>
+
+        <!-- LISTINGS -->
+        <div class="SP" id="p-listings">
+          <div class="ROW-TOP">
+            <div>
+              <div class="RT-L">Property listings</div>
+              <div class="RT-S">48 active · 7 pending · 3 draft</div>
+            </div>
+            <div class="RT-R">
+              <div class="SRCH"><i class="ti ti-search" style="font-size:14px;color:#94a3b8"
+                  aria-hidden="true"></i><input placeholder="Search…"></div>
+              <button class="ADD-BTN" onclick="openMod('add-listing')"><i class="ti ti-plus" aria-hidden="true"></i> Add
+                listing</button>
+            </div>
+          </div>
+          <div class="SEG">
+            <div class="ST ac">All</div>
+            <div class="ST">For Sale</div>
+            <div class="ST">For Rent</div>
+            <div class="ST">Off-plan</div>
+          </div>
+          <div class="CC" style="padding:0;overflow:hidden;margin-bottom:0">
+            <table class="TBL">
+              <thead>
+                <tr>
+                  <th style="width:27%">Property</th>
+                  <th style="width:16%">Area</th>
+                  <th style="width:14%">Price</th>
+                  <th style="width:10%">Type</th>
+                  <th style="width:10%">Status</th>
+                  <th style="width:9%">Views</th>
+                  <th style="width:14%">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="lst-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PROJECTS CRUD -->
+        <div class="SP" id="p-projects">
+          <div class="ROW-TOP">
+            <div>
+              <div class="RT-L">Projects</div>
+              <div class="RT-S" id="proj-count">3 projects</div>
+            </div>
+            <div class="RT-R">
+              <div class="SRCH"><i class="ti ti-search" style="font-size:14px;color:#94a3b8"
+                  aria-hidden="true"></i><input placeholder="Search projects…" oninput="filterP(this.value)"></div>
+              <button class="ADD-BTN" onclick="openMod('add-project')"><i class="ti ti-plus" aria-hidden="true"></i> New
+                project</button>
+            </div>
+          </div>
+          <div class="TOAST" id="proj-toast"></div>
+          <div class="CC" style="padding:0;overflow:hidden;margin-bottom:0">
+            <table class="TBL">
+              <thead>
+                <tr>
+                  <th style="width:22%">Project</th>
+                  <th style="width:13%">Location</th>
+                  <th style="width:13%">Developer</th>
+                  <th style="width:11%">Value</th>
+                  <th style="width:8%">Units</th>
+                  <th style="width:11%">Status</th>
+                  <th style="width:9%">Handover</th>
+                  <th style="width:13%">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="proj-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PROJECT DETAIL -->
+        <div class="SP" id="p-project-detail">
+          <div style="margin-bottom:16px">
+            <button class="BTN-OUT" onclick="goBackToProjects()"
+              style="padding:6px 12px;font-size:11px;display:inline-flex;align-items:center;gap:4px;cursor:pointer">
+              <i class="ti ti-arrow-narrow-left" style="font-size:14px" aria-hidden="true"></i> Back to Projects
+            </button>
+          </div>
+          <div class="CC" style="margin-bottom:12px">
+            <div
+              style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #f0f9ff;padding-bottom:12px;margin-bottom:16px">
+              <div>
+                <h2 id="pd-name" style="font-size:18px;font-weight:700;color:#0c1a2e">Project Name</h2>
+                <div id="pd-loc" style="font-size:12px;color:#64748b;margin-top:4px"><i class="ti ti-map-pin"
+                    aria-hidden="true"></i> Dubai Marina</div>
+              </div>
+              <span id="pd-status" class="badge b-sale">Under construction</span>
+            </div>
+
+            <div
+              style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;margin-bottom:18px">
+              <div style="background:#f8fafc;padding:10px 14px;border-radius:8px;border:1px solid #e2e8f0">
+                <div style="font-size:10px;color:#64748b;text-transform:uppercase;font-weight:600">Developer</div>
+                <div id="pd-dev" style="font-size:13px;font-weight:600;color:#0c1a2e;margin-top:2px">-</div>
+              </div>
+              <div style="background:#f8fafc;padding:10px 14px;border-radius:8px;border:1px solid #e2e8f0">
+                <div style="font-size:10px;color:#64748b;text-transform:uppercase;font-weight:600">Total Value</div>
+                <div id="pd-val" style="font-size:13px;font-weight:600;color:#0ea5e9;margin-top:2px">-</div>
+              </div>
+              <div style="background:#f8fafc;padding:10px 14px;border-radius:8px;border:1px solid #e2e8f0">
+                <div style="font-size:10px;color:#64748b;text-transform:uppercase;font-weight:600">Units</div>
+                <div id="pd-units" style="font-size:13px;font-weight:600;color:#0c1a2e;margin-top:2px">-</div>
+              </div>
+              <div style="background:#f8fafc;padding:10px 14px;border-radius:8px;border:1px solid #e2e8f0">
+                <div style="font-size:10px;color:#64748b;text-transform:uppercase;font-weight:600">Handover</div>
+                <div id="pd-date" style="font-size:13px;font-weight:600;color:#0c1a2e;margin-top:2px">-</div>
+              </div>
+            </div>
+
+            <div style="margin-bottom:18px">
+              <h3 style="font-size:12px;font-weight:600;color:#0c1a2e;margin-bottom:6px">About the Project</h3>
+              <p id="pd-desc" style="font-size:12px;color:#475569;line-height:1.5">No description available for this
+                luxury development.</p>
+            </div>
+          </div>
+
+          <div class="CC">
+            <h3 style="font-size:12px;font-weight:600;color:#0c1a2e;margin-bottom:10px">Active Linked Listings</h3>
+            <div id="pd-listings" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <!-- Listings populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PROPERTY VIEWINGS -->
+        <div class="SP" id="p-viewings">
+          <div class="ROW-TOP">
+            <div>
+              <div class="RT-L">Upcoming Property Viewings</div>
+              <div class="RT-S" id="viewings-count">3 viewings scheduled</div>
+            </div>
+            <div class="RT-R">
+              <button class="ADD-BTN" onclick="openMod('add-viewing')"><i class="ti ti-plus" aria-hidden="true"></i>
+                Schedule viewing</button>
+            </div>
+          </div>
+          <div class="CC" style="padding:0;overflow:hidden;margin-bottom:0">
+            <table class="TBL">
+              <thead>
+                <tr>
+                  <th style="width:25%">Property</th>
+                  <th style="width:20%">Client Name</th>
+                  <th style="width:25%">Date & Time</th>
+                  <th style="width:15%">Agent</th>
+                  <th style="width:15%">Status</th>
+                </tr>
+              </thead>
+              <tbody id="viewings-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- CONTRACTS & AGREEMENTS -->
+        <div class="SP" id="p-contracts">
+          <div class="ROW-TOP">
+            <div>
+              <div class="RT-L">Dubai RERA Contracts & Agreements</div>
+              <div class="RT-S">RERA Standard Broker Forms & Lease Registrations</div>
+            </div>
+            <div class="RT-R">
+              <button class="ADD-BTN" onclick="openMod('add-contract')"><i class="ti ti-plus" aria-hidden="true"></i>
+                Generate Contract</button>
+            </div>
+          </div>
+
+          <!-- RERA Forms Guide Card Grid -->
+          <div
+            style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:12px;margin-bottom:16px">
+            <div
+              style="background:#fff;border:1.5px solid #e0f2fe;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <span class="badge b-sale" style="margin-bottom:6px">Form A</span>
+                <h4 style="font-size:12px;font-weight:600;color:#0c1a2e">Seller Agreement</h4>
+                <p style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">Contract between seller and
+                  broker listing the property for marketing.</p>
+              </div>
+            </div>
+            <div
+              style="background:#fff;border:1.5px solid #e0f2fe;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <span class="badge b-rent" style="margin-bottom:6px">Form B</span>
+                <h4 style="font-size:12px;font-weight:600;color:#0c1a2e">Buyer Agreement</h4>
+                <p style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">Contract between buyer and broker
+                  authorizing property search.</p>
+              </div>
+            </div>
+            <div
+              style="background:#fff;border:1.5px solid #e0f2fe;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <span class="badge b-off" style="margin-bottom:6px">Form F (MOU)</span>
+                <h4 style="font-size:12px;font-weight:600;color:#0c1a2e">Purchase Agreement</h4>
+                <p style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">The binding memorandum of
+                  understanding between buyer and seller.</p>
+              </div>
+            </div>
+            <div
+              style="background:#fff;border:1.5px solid #e0f2fe;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between">
+              <div>
+                <span class="badge b-done" style="margin-bottom:6px">Ejari</span>
+                <h4 style="font-size:12px;font-weight:600;color:#0c1a2e">Tenancy Contract</h4>
+                <p style="font-size:10px;color:#64748b;margin-top:4px;line-height:1.4">Official Ejari registration
+                  required for all Dubai rental properties.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="CC" style="padding:0;overflow:hidden;margin-bottom:0">
+            <table class="TBL">
+              <thead>
+                <tr>
+                  <th style="width:15%">Ref No.</th>
+                  <th style="width:15%">Type</th>
+                  <th style="width:20%">Property</th>
+                  <th style="width:25%">Parties</th>
+                  <th style="width:15%">Value</th>
+                  <th style="width:10%">Status</th>
+                </tr>
+              </thead>
+              <tbody id="contracts-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- MARKETING CAMPAIGNS -->
+        <div class="SP" id="p-campaigns">
+          <div class="ROW-TOP">
+            <div>
+              <div class="RT-L">Marketing Campaigns</div>
+              <div class="RT-S" id="campaigns-count">3 active marketing campaigns</div>
+            </div>
+            <div class="RT-R">
+              <button class="ADD-BTN" onclick="openMod('add-campaign')"><i class="ti ti-plus" aria-hidden="true"></i>
+                New Campaign</button>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:12px"
+            id="campaigns-grid"></div>
+        </div>
+
+        <!-- USERS & ROLES -->
+        <div class="SP" id="p-users">
+          <div class="ROW-TOP">
+            <div>
+              <div class="RT-L">Users & Roles Management</div>
+              <div class="RT-S" id="users-count">4 users active</div>
+            </div>
+            <div class="RT-R">
+              <button class="ADD-BTN" onclick="openMod('add-user')"><i class="ti ti-plus" aria-hidden="true"></i> Add
+                User</button>
+            </div>
+          </div>
+          <div class="CC" style="padding:0;overflow:hidden;margin-bottom:0">
+            <table class="TBL">
+              <thead>
+                <tr>
+                  <th style="width:25%">Name</th>
+                  <th style="width:20%">Role</th>
+                  <th style="width:25%">Email Address</th>
+                  <th style="width:20%">Mobile Number</th>
+                  <th style="width:10%">Status</th>
+                </tr>
+              </thead>
+              <tbody id="users-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SETTINGS -->
+        <div class="SP" id="p-settings">
+          <div class="CC" style="margin-bottom:12px">
+            <h3
+              style="font-size:14px;font-weight:600;color:#0c1a2e;margin-bottom:12px;border-bottom:1px solid #f0f9ff;padding-bottom:8px">
+              RERA Agency Details</h3>
+            <div class="FG2">
+              <div class="FG"><label class="FL2">Agency Legal Name</label><input class="FI" id="st-name"
+                  value="TopLuxuryProperty Real Estate Brokerage"></div>
+              <div class="FG"><label class="FL2">RERA ORN (Office Registration Number)</label><input class="FI"
+                  id="st-orn" value="ORN-20982"></div>
+            </div>
+            <div class="FG2">
+              <div class="FG"><label class="FL2">Office Location</label><input class="FI" id="st-loc"
+                  value="Marina Plaza, Floor 24, Dubai Marina, UAE"></div>
+              <div class="FG"><label class="FL2">Primary Currency</label>
+                <select class="FI" id="st-curr">
+                  <option selected>AED - UAE Dirham</option>
+                  <option>USD - US Dollar</option>
+                  <option>EUR - Euro</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="CC" style="margin-bottom:12px">
+            <h3
+              style="font-size:14px;font-weight:600;color:#0c1a2e;margin-bottom:12px;border-bottom:1px solid #f0f9ff;padding-bottom:8px">
+              Portal Synced Feeds (XML API URLs)</h3>
+            <p style="font-size:11px;color:#64748b;margin-bottom:12px">Use these URLs inside Property Finder and Bayut
+              agent consoles to auto-sync your active listings.</p>
+            <div class="FG">
+              <label class="FL2">Property Finder Feed (XML Format)</label>
+              <input class="FI" readonly
+                value="https://api.topluxuryproperty.com/feeds/propertyfinder?key=tlp_dubai_xml_982">
+            </div>
+            <div class="FG">
+              <label class="FL2">Bayut & Dubizzle Feed (XML Format)</label>
+              <input class="FI" readonly value="https://api.topluxuryproperty.com/feeds/bayut?key=tlp_dubai_xml_982">
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end">
+            <button class="BTN-SKY" onclick="toast('Settings saved successfully')"><i class="ti ti-device-floppy"
+                aria-hidden="true"></i> Save Settings</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT MODAL -->
+  <div id="mod-add-project" style="display:none">
+    <div class="MOD-BG">
+      <div class="MOD">
+        <div class="MH">
+          <div>
+            <div class="MH-T" id="proj-mod-title">Add new project</div>
+            <div class="MH-S">TopLuxuryProperty CMS</div>
+          </div>
+          <div class="MX" onclick="closeMod('add-project')"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+        <div class="MB">
+          <input type="hidden" id="edit-pid">
+          <div class="FG"><label class="FL2">Project name</label><input class="FI" id="pf-name"
+              placeholder="e.g. Marina Skies Tower"></div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Location / area</label><input class="FI" id="pf-loc"
+                placeholder="Dubai Marina"></div>
+            <div class="FG"><label class="FL2">Developer</label><input class="FI" id="pf-dev"
+                placeholder="Emaar, Nakheel…"></div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Total value (AED)</label><input class="FI" id="pf-val" type="number"
+                placeholder="1200000000"></div>
+            <div class="FG"><label class="FL2">Units</label><input class="FI" id="pf-units" type="number"
+                placeholder="240"></div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Handover date</label><input class="FI" id="pf-date" type="date"></div>
+            <div class="FG"><label class="FL2">Status</label><select class="FI" id="pf-status">
+                <option>Off-plan</option>
+                <option>Under construction</option>
+                <option>Ready</option>
+                <option>Sold out</option>
+              </select></div>
+          </div>
+          <div class="FG"><label class="FL2">Property types offered</label>
+            <div class="FG3">
+              <div class="RT-CHIP" onclick="tog(this)">Studio</div>
+              <div class="RT-CHIP sel" onclick="tog(this)">1 BR</div>
+              <div class="RT-CHIP sel" onclick="tog(this)">2 BR</div>
+              <div class="RT-CHIP" onclick="tog(this)">3 BR</div>
+              <div class="RT-CHIP" onclick="tog(this)">4+ BR</div>
+              <div class="RT-CHIP" onclick="tog(this)">Penthouse</div>
+            </div>
+          </div>
+          <div class="FG"><label class="FL2">Description</label><textarea class="FI" id="pf-desc" rows="2"
+              placeholder="Brief project overview…" style="resize:vertical"></textarea></div>
+        </div>
+        <div class="MF">
+          <button class="BTN-OUT" onclick="closeMod('add-project')">Cancel</button>
+          <button class="BTN-SKY" onclick="saveProject()"><i class="ti ti-device-floppy" aria-hidden="true"></i> Save
+            project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM MODAL -->
+  <div id="mod-del-project" style="display:none">
+    <div class="MOD-BG">
+      <div class="MOD" style="max-width:360px">
+        <div class="MH" style="background:#7f1d1d">
+          <div>
+            <div class="MH-T">Delete project?</div>
+            <div class="MH-S" style="color:#fca5a5">This cannot be undone</div>
+          </div>
+          <div class="MX" onclick="closeMod('del-project')"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+        <div class="MB">
+          <p style="font-size:13px;color:#334155;line-height:1.6">Permanently delete <strong id="del-pname"
+              style="color:#0c1a2e"></strong>? All linked listings and leads will be unlinked from this project.</p>
+        </div>
+        <div class="MF">
+          <button class="BTN-OUT" onclick="closeMod('del-project')">Cancel</button>
+          <button class="BTN-DEL" onclick="confirmDel()"><i class="ti ti-trash" aria-hidden="true"></i> Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD LISTING MODAL -->
+  <div id="mod-add-listing" style="display:none">
+    <div class="MOD-BG">
+      <div class="MOD">
+        <div class="MH">
+          <div>
+            <div class="MH-T" id="lst-mod-title">Add property listing</div>
+            <div class="MH-S">TopLuxuryProperty portal</div>
+          </div>
+          <div class="MX" onclick="closeMod('add-listing')"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+        <div class="MB">
+          <input type="hidden" id="edit-lid">
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Property title</label><input class="FI" id="lf-title"
+                placeholder="Marina Pk Tower – 3BR"></div>
+            <div class="FG"><label class="FL2">Area</label><input class="FI" id="lf-area" placeholder="Dubai Marina">
+            </div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Price (AED)</label><input class="FI" id="lf-price" type="number"
+                placeholder="4200000"></div>
+            <div class="FG"><label class="FL2">Listing type</label><select class="FI" id="lf-type">
+                <option>For Sale</option>
+                <option>For Rent</option>
+                <option>Off-plan</option>
+              </select></div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Bedrooms</label><select class="FI" id="lf-beds">
+                <option>Studio</option>
+                <option>1 BR</option>
+                <option>2 BR</option>
+                <option>3 BR</option>
+                <option>4+ BR</option>
+                <option>Penthouse</option>
+              </select></div>
+            <div class="FG"><label class="FL2">Status</label><select class="FI" id="lf-status">
+                <option>Active</option>
+                <option>Pending</option>
+                <option>Draft</option>
+              </select></div>
+          </div>
+          <div class="FG"><label class="FL2">Broker reference</label><input class="FI" id="lf-ref"
+              placeholder="TLP-2025-0042"></div>
+        </div>
+        <div class="MF">
+          <button class="BTN-OUT" onclick="closeMod('add-listing')">Cancel</button>
+          <button class="BTN-SKY" onclick="saveListing()"><i class="ti ti-device-floppy" aria-hidden="true"></i> Save
+            listing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- SCHEDULE VIEWING MODAL -->
+  <div id="mod-add-viewing" style="display:none">
+    <div class="MOD-BG">
+      <div class="MOD">
+        <div class="MH">
+          <div>
+            <div class="MH-T">Schedule Viewing</div>
+            <div class="MH-S">TopLuxuryProperty Portal</div>
+          </div>
+          <div class="MX" onclick="closeMod('add-viewing')"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+        <div class="MB">
+          <div class="FG"><label class="FL2">Select Property</label>
+            <select class="FI" id="vf-property"></select>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Client Name</label><input class="FI" id="vf-client"
+                placeholder="e.g. John Doe"></div>
+            <div class="FG"><label class="FL2">Agent Name</label><input class="FI" id="vf-agent"
+                placeholder="e.g. Elena Rostova"></div>
+          </div>
+          <div class="FG"><label class="FL2">Date & Time</label><input class="FI" id="vf-datetime"
+              type="datetime-local"></div>
+        </div>
+        <div class="MF">
+          <button class="BTN-OUT" onclick="closeMod('add-viewing')">Cancel</button>
+          <button class="BTN-SKY" onclick="saveViewing()"><i class="ti ti-device-floppy" aria-hidden="true"></i> Save
+            viewing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GENERATE CONTRACT MODAL -->
+  <div id="mod-add-contract" style="display:none">
+    <div class="MOD-BG">
+      <div class="MOD">
+        <div class="MH">
+          <div>
+            <div class="MH-T">Generate Dubai RERA Contract</div>
+            <div class="MH-S">TopLuxuryProperty Portal</div>
+          </div>
+          <div class="MX" onclick="closeMod('add-contract')"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+        <div class="MB">
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Contract Type</label>
+              <select class="FI" id="cf-type">
+                <option>Form A (Seller Agreement)</option>
+                <option>Form B (Buyer Agreement)</option>
+                <option>Form F (MOU)</option>
+                <option>Ejari (Tenancy)</option>
+              </select>
+            </div>
+            <div class="FG"><label class="FL2">Select Property</label>
+              <select class="FI" id="cf-property"></select>
+            </div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">First Party (Seller/Landlord/Agency)</label><input class="FI"
+                id="cf-party1" placeholder="e.g. Sultan Al-Mansoori"></div>
+            <div class="FG"><label class="FL2">Second Party (Buyer/Tenant)</label><input class="FI" id="cf-party2"
+                placeholder="e.g. Priya Krishnamurthy"></div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Contract Amount / Value</label><input class="FI" id="cf-value"
+                placeholder="e.g. AED 4,200,000"></div>
+            <div class="FG"><label class="FL2">Status</label>
+              <select class="FI" id="cf-status">
+                <option>Draft</option>
+                <option>Signed</option>
+                <option>Registered</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="MF">
+          <button class="BTN-OUT" onclick="closeMod('add-contract')">Cancel</button>
+          <button class="BTN-SKY" onclick="saveContract()"><i class="ti ti-device-floppy" aria-hidden="true"></i>
+            Generate contract</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CREATE CAMPAIGN MODAL -->
+  <div id="mod-add-campaign" style="display:none">
+    <div class="MOD-BG">
+      <div class="MOD">
+        <div class="MH">
+          <div>
+            <div class="MH-T">Launch Marketing Campaign</div>
+            <div class="MH-S">TopLuxuryProperty Portal</div>
+          </div>
+          <div class="MX" onclick="closeMod('add-campaign')"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+        <div class="MB">
+          <div class="FG"><label class="FL2">Campaign Name</label><input class="FI" id="cam-name"
+              placeholder="e.g. Palm Jumeirah Summer Campaign"></div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Marketing Channel</label>
+              <select class="FI" id="cam-channel">
+                <option>Instagram Ads</option>
+                <option>Google Search Ads</option>
+                <option>Email Newsletter</option>
+                <option>SMS Direct Marketing</option>
+                <option>Property Portal Promos</option>
+              </select>
+            </div>
+            <div class="FG"><label class="FL2">Budget (AED)</label><input class="FI" id="cam-budget" type="number"
+                placeholder="5000"></div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Leads Generated</label><input class="FI" id="cam-leads" type="number"
+                placeholder="0" value="0"></div>
+            <div class="FG"><label class="FL2">Status</label>
+              <select class="FI" id="cam-status">
+                <option>Active</option>
+                <option>Completed</option>
+                <option>Draft</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="MF">
+          <button class="BTN-OUT" onclick="closeMod('add-campaign')">Cancel</button>
+          <button class="BTN-SKY" onclick="saveCampaign()"><i class="ti ti-device-floppy" aria-hidden="true"></i> Save
+            Campaign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD USER MODAL -->
+  <div id="mod-add-user" style="display:none">
+    <div class="MOD-BG">
+      <div class="MOD">
+        <div class="MH">
+          <div>
+            <div class="MH-T">Add CMS User</div>
+            <div class="MH-S">TopLuxuryProperty Portal</div>
+          </div>
+          <div class="MX" onclick="closeMod('add-user')"><i class="ti ti-x" aria-hidden="true"></i></div>
+        </div>
+        <div class="MB">
+          <div class="FG"><label class="FL2">Full Name</label><input class="FI" id="us-name"
+              placeholder="e.g. Tarek Al-Masri"></div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">RERA Role</label>
+              <select class="FI" id="us-role">
+                <option>Listing Agent</option>
+                <option>Branch Manager</option>
+                <option>CRM Coordinator</option>
+                <option>Super Admin</option>
+              </select>
+            </div>
+            <div class="FG"><label class="FL2">Email Address</label><input class="FI" id="us-email"
+                placeholder="tarek@topluxuryproperty.com"></div>
+          </div>
+          <div class="FG2">
+            <div class="FG"><label class="FL2">Mobile Number (UAE)</label><input class="FI" id="us-phone"
+                value="+971 50 "></div>
+            <div class="FG"><label class="FL2">Status</label>
+              <select class="FI" id="us-status">
+                <option>Active</option>
+                <option>Suspended</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="MF">
+          <button class="BTN-OUT" onclick="closeMod('add-user')">Cancel</button>
+          <button class="BTN-SKY" onclick="saveUser()"><i class="ti ti-device-floppy" aria-hidden="true"></i> Add
+            User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+  const CREDS = { user: 'manujgarg', pass: 'admin123' };
+  const TITLES = {
+    analytics: 'Analytics Dashboard',
+    leads: 'Leads & Pipeline',
+    listings: 'Property Listings',
+    projects: 'Projects',
+    viewings: 'Property Viewings',
+    contracts: 'Contracts & Agreements (Form A/B/F/Ejari)',
+    campaigns: 'Marketing Campaigns',
+    users: 'Users & Roles Management',
+    settings: 'Agency & CRM Settings'
+  };
+
+  function doLogin() {
+    const u = document.getElementById('inp-user').value.trim().toLowerCase();
+    const p = document.getElementById('inp-pass').value.trim();
+    const err = document.getElementById('login-err');
+    if (u === CREDS.user && p === CREDS.pass) {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').classList.add('show');
+      renderListings(listings);
+      renderProjects(projects);
+      renderViewings(viewings);
+      renderContracts(contracts);
+      renderCampaigns(campaigns);
+      renderUsers(cmsUsers);
+      initCharts();
+    } else {
+      err.classList.add('show');
+    }
+  }
+
+  function doLogout() {
+    document.getElementById('dashboard').classList.remove('show');
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('login-err').classList.remove('show');
+  }
+
+  document.getElementById('inp-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('inp-user').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+  function sw(sec, el) {
+    document.querySelectorAll('.SP').forEach(p => p.classList.remove('ac'));
+    document.querySelectorAll('.NI').forEach(n => n.classList.remove('ac'));
+    document.getElementById('p-' + sec).classList.add('ac');
+    el.classList.add('ac');
+    document.getElementById('tb-title').textContent = TITLES[sec];
+    ['mod-add-project', 'mod-del-project', 'mod-add-listing', 'mod-add-viewing', 'mod-add-contract', 'mod-add-campaign', 'mod-add-user'].forEach(m => { const el = document.getElementById(m); if (el) el.style.display = 'none'; });
+  }
+
+  function tog(el) { el.classList.toggle('sel') }
+
+  let projects = [
+    { id: 1, name: 'Marina Skies Tower', loc: 'Dubai Marina', dev: 'Emaar', val: 'AED 1.2B', units: 320, status: 'Under construction', date: 'Q4 2026', desc: 'A stunning architectural masterpiece in the heart of Dubai Marina, offering panoramic sea views, premium interiors, and world-class amenities.' },
+    { id: 2, name: 'Palm Crest Villas', loc: 'Palm Jumeirah', dev: 'Nakheel', val: 'AED 850M', units: 48, status: 'Off-plan', date: 'Q2 2027', desc: 'Ultra-exclusive luxury beachfront villas located on the fronds of Palm Jumeirah, featuring private infinity pools, private beaches, and smart-home integration.' },
+    { id: 3, name: 'Downtown Heights', loc: 'Downtown Dubai', dev: 'Meraas', val: 'AED 2.1B', units: 510, status: 'Ready', date: 'Delivered', desc: 'Premium residential tower steps away from the Burj Khalifa and Dubai Mall, offering high-end urban living with a sleek modern design.' }
+  ];
+  let nextPid = 4, delId = null;
+
+  let listings = [
+    { id: 1, title: 'Marina Pk Tower – 3BR', area: 'Dubai Marina', price: 'AED 4,200,000', type: 'For Sale', status: 'Active', views: 1241 },
+    { id: 2, title: 'Palm Frond Villa – 5BR', area: 'Palm Jumeirah', price: 'AED 750k/yr', type: 'For Rent', status: 'Active', views: 3891 },
+    { id: 3, title: 'DIFC Heights – Penthouse', area: 'DIFC', price: 'AED 9,750,000', type: 'Off-plan', status: 'Pending', views: 2108 },
+    { id: 4, title: 'JBR Breeze – 2BR', area: 'JBR', price: 'AED 3,100,000', type: 'For Sale', status: 'Active', views: 987 },
+    { id: 5, title: 'Business Bay Studio', area: 'Business Bay', price: 'AED 1,100,000', type: 'For Sale', status: 'Draft', views: 430 },
+  ];
+  let nextLid = 6, editLid = null;
+
+  const SC = { 'Off-plan': 'b-off', 'Under construction': 'b-sale', 'Ready': 'b-done', 'Sold out': 'b-hot' };
+  const TC = { 'For Sale': 'b-sale', 'For Rent': 'b-rent', 'Off-plan': 'b-off' };
+  const SS = { 'Active': 'b-done', 'Pending': 'b-off', 'Draft': 'b-hot' };
+
+  function renderProjects(data) {
+    document.getElementById('proj-count').textContent = data.length + ' project' + (data.length !== 1 ? 's' : '');
+    document.getElementById('proj-body').innerHTML = data.map(p => `
+    <tr>
+      <td><strong style="color:#0c1a2e">${p.name}</strong></td>
+      <td style="color:#475569;font-size:11px"><i class="ti ti-map-pin" style="font-size:11px" aria-hidden="true"></i> ${p.loc}</td>
+      <td style="color:#475569;font-size:11px">${p.dev}</td>
+      <td class="PT">${p.val}</td>
+      <td style="color:#334155">${p.units}</td>
+      <td><span class="badge ${SC[p.status] || 'b-sale'}">${p.status}</span></td>
+      <td style="font-size:11px;color:#64748b">${p.date}</td>
+      <td><div class="TACT">
+        <button class="TEB t-view" onclick="viewP(${p.id})" aria-label="View"><i class="ti ti-eye" aria-hidden="true"></i></button>
+        <button class="TEB t-edit" onclick="editP(${p.id})" aria-label="Edit"><i class="ti ti-edit" aria-hidden="true"></i></button>
+        <button class="TEB t-del" onclick="deleteP(${p.id})" aria-label="Delete"><i class="ti ti-trash" aria-hidden="true"></i></button>
+      </div></td>
+    </tr>`).join('');
+  }
+
+  function renderListings(data) {
+    document.getElementById('lst-body').innerHTML = data.map(l => `
+    <tr>
+      <td><strong style="color:#0c1a2e;font-size:12px">${l.title}</strong></td>
+      <td style="color:#475569;font-size:11px">${l.area}</td>
+      <td class="PT">${l.price}</td>
+      <td><span class="badge ${TC[l.type] || 'b-sale'}">${l.type}</span></td>
+      <td><span class="badge ${SS[l.status] || 'b-sale'}">${l.status}</span></td>
+      <td style="color:#334155">${l.views.toLocaleString()}</td>
+      <td><div class="TACT">
+        <button class="TEB t-edit" onclick="editL(${l.id})"><i class="ti ti-edit" aria-hidden="true"></i></button>
+        <button class="TEB t-del" onclick="deleteL(${l.id})" aria-label="Delete"><i class="ti ti-trash" aria-hidden="true"></i></button>
+      </div></td>
+    </tr>`).join('');
+  }
+
+  function filterP(q) {
+    const f = q.toLowerCase();
+    renderProjects(f ? projects.filter(p => p.name.toLowerCase().includes(f) || p.loc.toLowerCase().includes(f) || p.dev.toLowerCase().includes(f)) : projects);
+  }
+
+  function openMod(m) {
+    if (m === 'add-project') {
+      document.getElementById('proj-mod-title').textContent = 'Add new project';
+      document.getElementById('edit-pid').value = '';
+      ['pf-name', 'pf-loc', 'pf-dev', 'pf-val', 'pf-units', 'pf-date', 'pf-desc'].forEach(id => document.getElementById(id).value = '');
+      document.getElementById('pf-status').value = 'Off-plan';
+    }
+    if (m === 'add-listing' && !editLid) {
+      document.getElementById('lst-mod-title').textContent = 'Add property listing';
+      document.getElementById('edit-lid').value = '';
+      ['lf-title', 'lf-area', 'lf-price', 'lf-ref'].forEach(id => document.getElementById(id).value = '');
+    }
+    if (m === 'add-viewing') {
+      populatePropertySelectors();
+      document.getElementById('vf-client').value = '';
+      document.getElementById('vf-agent').value = '';
+      document.getElementById('vf-datetime').value = '';
+    }
+    if (m === 'add-contract') {
+      populatePropertySelectors();
+      document.getElementById('cf-party1').value = '';
+      document.getElementById('cf-party2').value = '';
+      document.getElementById('cf-value').value = '';
+    }
+    if (m === 'add-campaign') {
+      document.getElementById('cam-name').value = '';
+      document.getElementById('cam-budget').value = '';
+      document.getElementById('cam-leads').value = 0;
+    }
+    if (m === 'add-user') {
+      document.getElementById('us-name').value = '';
+      document.getElementById('us-email').value = '';
+      document.getElementById('us-phone').value = '+971 50 ';
+    }
+    document.getElementById('mod-' + m).style.display = 'block';
+  }
+
+  function closeMod(m) { document.getElementById('mod-' + m).style.display = 'none'; editLid = null; }
+
+  function saveProject() {
+    const id = document.getElementById('edit-pid').value;
+    const raw = Number(document.getElementById('pf-val').value) || 0;
+    const valFmt = raw >= 1e9 ? 'AED ' + (raw / 1e9).toFixed(1) + 'B' : raw >= 1e6 ? 'AED ' + (raw / 1e6).toFixed(0) + 'M' : 'AED ' + raw.toLocaleString();
+    const d = document.getElementById('pf-date').value;
+    const p = {
+      id: id ? Number(id) : nextPid++,
+      name: document.getElementById('pf-name').value || 'Unnamed project',
+      loc: document.getElementById('pf-loc').value || 'UAE',
+      dev: document.getElementById('pf-dev').value || '—',
+      val: raw ? valFmt : '—',
+      units: Number(document.getElementById('pf-units').value) || 0,
+      status: document.getElementById('pf-status').value,
+      date: d || 'TBD',
+      desc: document.getElementById('pf-desc').value || ''
+    };
+    if (id) { const i = projects.findIndex(x => x.id === Number(id)); if (i > -1) projects[i] = p; }
+    else projects.push(p);
+    closeMod('add-project');
+    renderProjects(projects);
+    toast(id ? 'Project updated successfully' : 'Project added — ' + p.name);
+  }
+
+  function editP(id) {
+    const p = projects.find(x => x.id === id); if (!p) return;
+    document.getElementById('proj-mod-title').textContent = 'Edit project';
+    document.getElementById('edit-pid').value = id;
+    document.getElementById('pf-name').value = p.name;
+    document.getElementById('pf-loc').value = p.loc;
+    document.getElementById('pf-dev').value = p.dev;
+    document.getElementById('pf-units').value = p.units;
+    document.getElementById('pf-status').value = p.status;
+    document.getElementById('pf-desc').value = p.desc || '';
+    document.getElementById('pf-date').value = '';
+    openMod('add-project');
+  }
+
+  function viewP(id) {
+    const p = projects.find(x => x.id === id);
+    if (!p) return;
+
+    // Set title in top bar
+    document.getElementById('tb-title').textContent = p.name;
+
+    // Hide all SP pages
+    document.querySelectorAll('.SP').forEach(sp => sp.classList.remove('ac'));
+
+    // Show project detail page
+    document.getElementById('p-project-detail').classList.add('ac');
+
+    // Populate project detail page content
+    document.getElementById('pd-name').textContent = p.name;
+    document.getElementById('pd-loc').innerHTML = `<i class="ti ti-map-pin" aria-hidden="true"></i> ${p.loc}`;
+    document.getElementById('pd-dev').textContent = p.dev;
+    document.getElementById('pd-val').textContent = p.val;
+    document.getElementById('pd-units').textContent = p.units + ' Units';
+    document.getElementById('pd-status').textContent = p.status;
+    document.getElementById('pd-status').className = 'badge ' + (SC[p.status] || 'b-sale');
+    document.getElementById('pd-date').textContent = p.date;
+    document.getElementById('pd-desc').textContent = p.desc || 'No description available for this luxury development.';
+
+    // Also list matching listings for this project
+    const matchingListings = listings.filter(l => l.area.toLowerCase().includes(p.loc.toLowerCase()) || p.name.toLowerCase().includes(l.area.toLowerCase()) || p.loc.toLowerCase().includes(l.area.toLowerCase()));
+    const lstHtml = matchingListings.length ? matchingListings.map(l => `
+      <div class="pd-list-item">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+          <span style="font-weight:600;font-size:12px;color:#0c1a2e">${l.title}</span>
+          <span class="badge ${TC[l.type] || 'b-sale'}">${l.type}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#64748b">
+          <span>${l.area}</span>
+          <span class="PT">${l.price}</span>
+        </div>
+      </div>
+    `).join('') : '<div style="color:#64748b;font-size:12px;grid-column:1/-1;text-align:center;padding:16px;background:#f8fafc;border-radius:8px;border:1px dashed #e2e8f0">No active property listings linked to this project.</div>';
+    document.getElementById('pd-listings').innerHTML = lstHtml;
+  }
+
+  function goBackToProjects() {
+    // Hide all SP pages
+    document.querySelectorAll('.SP').forEach(sp => sp.classList.remove('ac'));
+    // Show projects list page
+    document.getElementById('p-projects').classList.add('ac');
+    // Restore projects title in top bar
+    document.getElementById('tb-title').textContent = 'Projects';
+  }
+
+  // UAE broker CMS additional modules (Viewings, Contracts, Campaigns, Users)
+  let viewings = [
+    { id: 1, property: 'Marina Skies Tower', client: 'Sarah Connor', datetime: '18 Jun 2026, 04:00 PM', agent: 'Elena Rostova', status: 'Confirmed' },
+    { id: 2, property: 'Palm Frond Villa – 5BR', client: 'Michael Scott', datetime: '19 Jun 2026, 11:30 AM', agent: 'Alex Mercer', status: 'Pending' },
+    { id: 3, property: 'Downtown Heights', client: 'Bruce Wayne', datetime: '20 Jun 2026, 02:00 PM', agent: 'Sarah Jenkins', status: 'Confirmed' }
+  ];
+  let nextVid = 4;
+  const VC = { 'Confirmed': 'b-done', 'Pending': 'b-off', 'Cancelled': 'b-hot' };
+
+  let contracts = [
+    { ref: 'CTR-2026-081', type: 'Form F (MOU)', property: 'Marina Skies Tower', parties: 'Sultan Al-Mansoori (S) & Priya K. (B)', amount: 'AED 4,200,000', status: 'Signed' },
+    { ref: 'CTR-2026-090', type: 'Form A', property: 'Palm Crest Villas', parties: 'TopLuxuryProperty & James Loughran (S)', amount: 'AED 20M Listing', status: 'Draft' },
+    { ref: 'CTR-2026-075', type: 'Ejari (Tenancy)', property: 'Downtown Heights', parties: 'Marcus Reynolds (T) & Elena (L)', amount: 'AED 180,000/yr', status: 'Registered' }
+  ];
+  let nextCid = 91;
+  const CC_BADGE = { 'Draft': 'b-off', 'Signed': 'b-done', 'Registered': 'b-sale' };
+
+  let campaigns = [
+    { id: 1, name: 'Palm Villas Instagram Blast', channel: 'Instagram Ads', budget: 'AED 12,000', leads: 64, status: 'Active' },
+    { id: 2, name: 'DIFC Penthouse Launch Email', channel: 'Email Newsletter', budget: 'AED 2,500', leads: 48, status: 'Completed' },
+    { id: 3, name: 'Downtown Off-plan SMS Campaign', channel: 'SMS Direct Marketing', budget: 'AED 5,000', leads: 12, status: 'Active' }
+  ];
+  let nextCamId = 4;
+  let editCamId = null;
+
+  let cmsUsers = [
+    { id: 1, name: 'Manuj Garg', role: 'Super Admin', email: 'manuj@topluxuryproperty.com', phone: '+971 50 123 4567', status: 'Active' },
+    { id: 2, name: 'Sarah Jenkins', role: 'Branch Manager', email: 'sarah.j@topluxuryproperty.com', phone: '+971 54 987 6543', status: 'Active' },
+    { id: 3, name: 'Elena Rostova', role: 'Listing Agent', email: 'elena.r@topluxuryproperty.com', phone: '+971 58 555 0192', status: 'Active' },
+    { id: 4, name: 'Tarek Al-Masri', role: 'CRM Coordinator', email: 'tarek@topluxuryproperty.com', phone: '+971 56 111 2233', status: 'Active' }
+  ];
+  let nextUsId = 5;
+
+  function renderViewings(data) {
+    document.getElementById('viewings-count').textContent = data.length + ' viewing' + (data.length !== 1 ? 's' : '') + ' scheduled';
+    document.getElementById('viewings-body').innerHTML = data.map(v => `
+    <tr>
+      <td><strong style="color:#0c1a2e;font-size:12px">${v.property}</strong></td>
+      <td style="color:#334155">${v.client}</td>
+      <td style="color:#475569;font-size:11px"><i class="ti ti-calendar" style="font-size:11px" aria-hidden="true"></i> ${v.datetime}</td>
+      <td style="color:#334155">${v.agent}</td>
+      <td><span class="badge ${VC[v.status] || 'b-sale'}">${v.status}</span></td>
+    </tr>`).join('');
+  }
+
+  function renderContracts(data) {
+    document.getElementById('contracts-body').innerHTML = data.map(c => `
+    <tr>
+      <td><strong style="color:#0ea5e9;font-size:11px">${c.ref}</strong></td>
+      <td><span class="badge ${c.type.includes('Form F') ? 'b-off' : c.type.includes('Form A') ? 'b-sale' : c.type.includes('Form B') ? 'b-rent' : 'b-done'}">${c.type}</span></td>
+      <td style="color:#0c1a2e;font-weight:500">${c.property}</td>
+      <td style="color:#475569;font-size:11px">${c.parties}</td>
+      <td class="PT">${c.amount}</td>
+      <td><span class="badge ${CC_BADGE[c.status] || 'b-sale'}">${c.status}</span></td>
+    </tr>`).join('');
+  }
+
+  function renderCampaigns(data) {
+    document.getElementById('campaigns-count').textContent = data.length + ' active marketing campaign' + (data.length !== 1 ? 's' : '');
+    const grid = document.getElementById('campaigns-grid');
+    if (!grid) return;
+    grid.innerHTML = data.map(c => {
+      let statusColor = c.status === 'Active' ? '#059669' : c.status === 'Completed' ? '#0ea5e9' : '#475569';
+      let statusBg = c.status === 'Active' ? '#dcfce7' : c.status === 'Completed' ? '#e0f2fe' : '#f1f5f9';
+      return `
+      <div style="background:#fff;border:1.5px solid #e0f2fe;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,0.02)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase">${c.channel}</span>
+          <span class="badge" style="background:${statusBg};color:${statusColor}">${c.status}</span>
+        </div>
+        <h3 style="font-size:13px;font-weight:600;color:#0c1a2e;margin-bottom:12px">${c.name}</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;border-top:1px solid #f0f9ff;padding-top:10px">
+          <div>
+            <div style="font-size:9px;color:#64748b">Budget</div>
+            <div style="font-size:12px;font-weight:600;color:#0c1a2e">${c.budget}</div>
+          </div>
+          <div>
+            <div style="font-size:9px;color:#64748b">Leads Generated</div>
+            <div style="font-size:12px;font-weight:600;color:#0ea5e9">${c.leads} leads</div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:5px">
+          <button class="TEB t-edit" onclick="editCampaign(${c.id})" style="padding:2px 6px"><i class="ti ti-edit" aria-hidden="true"></i></button>
+          <button class="TEB t-del" onclick="deleteCampaign(${c.id})" aria-label="Delete" style="padding:2px 6px"><i class="ti ti-trash" aria-hidden="true"></i></button>
+        </div>
+      </div>
+      `;
+    }).join('');
+  }
+
+  function renderUsers(data) {
+    document.getElementById('users-count').textContent = data.length + ' user' + (data.length !== 1 ? 's' : '') + ' active';
+    document.getElementById('users-body').innerHTML = data.map(u => {
+      let roleClass = u.role.includes('Admin') ? 'b-hot' : u.role.includes('Manager') ? 'b-sale' : u.role.includes('Coordinator') ? 'b-off' : 'b-done';
+      return `
+      <tr>
+        <td><strong style="color:#0c1a2e;font-size:12px">${u.name}</strong></td>
+        <td><span class="badge ${roleClass}">${u.role}</span></td>
+        <td style="color:#475569;font-size:11px">${u.email}</td>
+        <td style="color:#334155">${u.phone}</td>
+        <td><span class="badge ${u.status === 'Active' ? 'b-done' : 'b-hot'}">${u.status}</span></td>
+      </tr>`;
+    }).join('');
+  }
+
+  function populatePropertySelectors() {
+    const listOptions = listings.map(l => `<option value="${l.title}">${l.title} (${l.area})</option>`).join('');
+    const viewSel = document.getElementById('vf-property');
+    const conSel = document.getElementById('cf-property');
+    if (viewSel) viewSel.innerHTML = listOptions;
+    if (conSel) conSel.innerHTML = listOptions;
+  }
+
+  function saveViewing() {
+    const p = document.getElementById('vf-property').value;
+    const c = document.getElementById('vf-client').value || 'Unnamed Client';
+    const a = document.getElementById('vf-agent').value || 'Unassigned Agent';
+    const dt = document.getElementById('vf-datetime').value;
+    let dtFmt = 'TBD';
+    if (dt) {
+      const dateObj = new Date(dt);
+      dtFmt = dateObj.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + dateObj.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    }
+    const v = {
+      id: nextVid++,
+      property: p,
+      client: c,
+      datetime: dtFmt,
+      agent: a,
+      status: 'Pending'
+    };
+    viewings.push(v);
+    closeMod('add-viewing');
+    renderViewings(viewings);
+  }
+
+  function saveContract() {
+    const t = document.getElementById('cf-type').value;
+    const prop = document.getElementById('cf-property').value;
+    const p1 = document.getElementById('cf-party1').value || 'Party 1';
+    const p2 = document.getElementById('cf-party2').value || 'Party 2';
+    const val = document.getElementById('cf-value').value || '—';
+    const st = document.getElementById('cf-status').value;
+    const c = {
+      ref: 'CTR-2026-0' + nextCid++,
+      type: t,
+      property: prop,
+      parties: `${p1} & ${p2}`,
+      amount: val.startsWith('AED') ? val : 'AED ' + Number(val).toLocaleString(),
+      status: st
+    };
+    contracts.unshift(c);
+    closeMod('add-contract');
+    renderContracts(contracts);
+  }
+
+  function saveCampaign() {
+    const id = editCamId;
+    const name = document.getElementById('cam-name').value || 'New Campaign';
+    const channel = document.getElementById('cam-channel').value;
+    const budget = Number(document.getElementById('cam-budget').value) || 0;
+    const leads = Number(document.getElementById('cam-leads').value) || 0;
+    const st = document.getElementById('cam-status').value;
+    const c = {
+      id: id || nextCamId++,
+      name: name,
+      channel: channel,
+      budget: 'AED ' + budget.toLocaleString(),
+      leads: leads,
+      status: st
+    };
+    if (id) {
+      const i = campaigns.findIndex(x => x.id === id);
+      if (i > -1) campaigns[i] = c;
+    } else {
+      campaigns.push(c);
+    }
+    editCamId = null;
+    closeMod('add-campaign');
+    renderCampaigns(campaigns);
+  }
+
+  function deleteCampaign(id) {
+    campaigns = campaigns.filter(c => c.id !== id);
+    renderCampaigns(campaigns);
+  }
+
+  function editCampaign(id) {
+    const c = campaigns.find(x => x.id === id); if (!c) return;
+    editCamId = id;
+    document.getElementById('cam-name').value = c.name;
+    document.getElementById('cam-channel').value = c.channel;
+    document.getElementById('cam-budget').value = c.budget.replace(/[^0-9]/g, '');
+    document.getElementById('cam-leads').value = c.leads;
+    document.getElementById('cam-status').value = c.status;
+    openMod('add-campaign');
+  }
+
+  function saveUser() {
+    const name = document.getElementById('us-name').value || 'New User';
+    const role = document.getElementById('us-role').value;
+    const email = document.getElementById('us-email').value || '—';
+    const phone = document.getElementById('us-phone').value || '—';
+    const st = document.getElementById('us-status').value;
+    const u = {
+      id: nextUsId++,
+      name: name,
+      role: role,
+      email: email,
+      phone: phone,
+      status: st
+    };
+    cmsUsers.push(u);
+    closeMod('add-user');
+    renderUsers(cmsUsers);
+  }
+
+  function deleteP(id) {
+    const p = projects.find(x => x.id === id); if (!p) return;
+    delId = id;
+    document.getElementById('del-pname').textContent = p.name;
+    closeMod('add-project');
+    document.getElementById('mod-del-project').style.display = 'block';
+  }
+
+  function confirmDel() {
+    const p = projects.find(x => x.id === delId);
+    projects = projects.filter(x => x.id !== delId);
+    closeMod('del-project');
+    renderProjects(projects);
+    toast((p ? p.name : 'Project') + ' deleted');
+  }
+
+  function saveListing() {
+    const id = editLid;
+    const price = Number(document.getElementById('lf-price').value) || 0;
+    const l = {
+      id: id || nextLid++,
+      title: document.getElementById('lf-title').value || 'New property',
+      area: document.getElementById('lf-area').value || 'UAE',
+      price: 'AED ' + price.toLocaleString(),
+      type: document.getElementById('lf-type').value,
+      status: document.getElementById('lf-status').value,
+      views: id ? listings.find(x => x.id === id)?.views || 0 : 0
+    };
+    if (id) { const i = listings.findIndex(x => x.id === id); if (i > -1) listings[i] = l; }
+    else listings.unshift(l);
+    closeMod('add-listing');
+    renderListings(listings);
+  }
+
+  function editL(id) {
+    const l = listings.find(x => x.id === id); if (!l) return;
+    editLid = id;
+    document.getElementById('lst-mod-title').textContent = 'Edit listing';
+    document.getElementById('edit-lid').value = id;
+    document.getElementById('lf-title').value = l.title;
+    document.getElementById('lf-area').value = l.area;
+    document.getElementById('lf-price').value = l.price.replace(/[^0-9]/g, '') || '';
+    document.getElementById('lf-type').value = l.type;
+    document.getElementById('lf-status').value = l.status;
+    openMod('add-listing');
+  }
+
+  function deleteL(id) {
+    listings = listings.filter(x => x.id !== id);
+    renderListings(listings);
+  }
+
+  function toast(msg, isErr) {
+    const el = document.getElementById('proj-toast');
+    el.textContent = msg;
+    el.className = 'TOAST show' + (isErr ? ' err' : '');
+    setTimeout(() => el.classList.remove('show'), 3000);
+  }
+
+  let chartsInit = false;
+  function initCharts() {
+    if (chartsInit) return; chartsInit = true;
+    new Chart(document.getElementById('cSess'), { type: 'bar', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], datasets: [{ label: 'Sessions', data: [14200, 16800, 19300, 22100, 21400, 24381], backgroundColor: '#0ea5e9', borderRadius: 4 }, { label: 'Users', data: [10100, 12300, 14800, 17500, 16900, 19200], backgroundColor: '#0c1a2e', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 10 }, color: '#94a3b8' }, grid: { display: false } }, y: { ticks: { font: { size: 10 }, color: '#94a3b8', callback: v => (v / 1000).toFixed(0) + 'k' }, grid: { color: 'rgba(0,0,0,0.04)' } } } } });
+    new Chart(document.getElementById('cSrc'), { type: 'doughnut', data: { labels: ['Organic', 'Direct', 'Paid', 'Social'], datasets: [{ data: [42, 28, 18, 12], backgroundColor: ['#0ea5e9', '#0c1a2e', '#38bdf8', '#7dd3fc'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, cutout: '68%', plugins: { legend: { display: false } } } });
+    new Chart(document.getElementById('cLeads'), { type: 'bar', data: { labels: ['Website', 'Referral', 'Portals', 'Social', 'Events'], datasets: [{ data: [142, 88, 67, 31, 19], backgroundColor: '#0ea5e9', borderRadius: 4 }] }, options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { font: { size: 10 }, color: '#94a3b8' }, grid: { color: 'rgba(0,0,0,0.04)' } }, y: { ticks: { font: { size: 10 }, color: '#94a3b8' }, grid: { display: false } } } } });
+  }
+</script>
